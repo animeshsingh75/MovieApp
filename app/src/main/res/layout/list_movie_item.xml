@@ -6,7 +6,7 @@
     <data>
         <variable
             name="movie"
-            type="com.example.movieapp.data.Movie" />
+            type="com.example.movieapp.data.movie.Movie" />
 
     </data>
 
@@ -18,7 +18,7 @@
 
         app:cardElevation="4dp">
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
 
             android:layout_height="wrap_content">
@@ -31,7 +31,8 @@
                 android:contentDescription="@string/poster_image"
                 android:padding="4dp"
                 android:src="@color/purple_700"
-                app:load="@{movie.poster}" />
+                app:load="@{movie.poster}"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/movie_title"
@@ -39,16 +40,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/movie_image"
-                android:layout_marginStart="4dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginEnd="4dp"
                 android:text="@{movie.title}"
                 android:gravity="center_horizontal"
                 android:lines="1"
                 android:ellipsize="end"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                tools:text="hello how are you" />
+                tools:text="Marvel:Endgame"
+                app:layout_constraintTop_toBottomOf="@id/movie_image" />
 
 
             <com.google.android.material.textview.MaterialTextView
@@ -56,15 +56,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/movie_title"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="4dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="8dp"
                 android:text="@{movie.year+` years back`}"
                 android:textSize="14sp"
-                tools:text="hello how are you" />
+                tools:text="5 years back"
+                android:id="@+id/release_date"
+                app:layout_constraintTop_toBottomOf="@+id/movie_title"
+                android:layout_marginTop="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </com.google.android.material.card.MaterialCardView>

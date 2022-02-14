@@ -9,33 +9,23 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.movieapp.MovieViewModel
 import com.example.movieapp.databinding.FragmentMovieBinding
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class MovieFragment : Fragment() {
     lateinit var binding: FragmentMovieBinding
 
     val viewModel: MovieViewModel by viewModels()
 
 
-    val movieAdapter = MoviePagingAdapter()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    private val movieAdapter = MoviePagingAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = FragmentMovieBinding.inflate(inflater, container, false)
         return binding.root
-
-
     }
 
 

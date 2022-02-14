@@ -1,19 +1,18 @@
 package com.example.movieapp.ui.movie
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.BR
-import com.example.movieapp.data.Movie
+import com.example.movieapp.data.movie.Movie
 import com.example.movieapp.databinding.ListMovieItemBinding
 import java.util.Calendar
 
 class MoviePagingAdapter : PagingDataAdapter<Movie, MoviePagingAdapter.MyViewHolder>(DIFF_UTIL) {
 
-    var onCLick: ((String) -> Unit)? = null
+    var onClick: ((String) -> Unit)? = null
 
     companion object {
         val DIFF_UTIL = object : DiffUtil.ItemCallback<Movie>() {
@@ -28,7 +27,7 @@ class MoviePagingAdapter : PagingDataAdapter<Movie, MoviePagingAdapter.MyViewHol
     }
 
     fun onMovieClick(listener: (String) -> Unit) {
-        onCLick = listener
+        onClick = listener
     }
 
     inner class MyViewHolder(val viewDataBinding: ListMovieItemBinding) :
@@ -36,19 +35,19 @@ class MoviePagingAdapter : PagingDataAdapter<Movie, MoviePagingAdapter.MyViewHol
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val data = getItem(position)
-        data?.Year?.let {
-            if (data?.Type == "series") {
-                val parts: List<String> = data.Year.split("–")
-                data.Year =
+        data?.year?.let {
+            if (data.type == "series") {
+                val parts: List<String> = data.year.split("–")
+                data.year =
                     (Calendar.getInstance().get(Calendar.YEAR) - parts[0].toInt()).toString()
             } else {
-                data.Year = (Calendar.getInstance().get(Calendar.YEAR) - it.toInt()).toString()
+                data.year = (Calendar.getInstance().get(Calendar.YEAR) - it.toInt()).toString()
             }
         }
         holder.viewDataBinding.setVariable(BR.movie, data)
 
         holder.viewDataBinding.root.setOnClickListener {
-            onCLick?.let {
+            onClick?.let {
                 it(data?.imdbID!!)
             }
         }

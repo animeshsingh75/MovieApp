@@ -1,6 +1,6 @@
-package com.example.movieapp.remote
+package com.example.movieapp.data.api
 
-import com.example.movieapp.data.MovieResponse
+import com.example.movieapp.data.movie.MovieResponse
 import com.example.movieapp.data.moviedetails.MovieDetails
 import retrofit2.Response
 import retrofit2.http.GET
